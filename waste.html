@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Game</title>
+    <style>
+        /* Add any necessary CSS styles here */
+    </style>
+</head>
+<body>
+    <h1>Memory Game</h1>
+    <div id="game-container"></div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Retrieve the number of players from the URL or local storage
+            const numberOfPlayers = parseInt(localStorage.getItem("numberOfPlayers"));
+
+            // Initialize arrays to store words for each player
+            const playerWords = new Array(numberOfPlayers).fill([]);
+
+            // Game logic function
+            const startGame = () => {
+                // Loop through each player's turn
+                for (let currentPlayer = 0; currentPlayer < numberOfPlayers; currentPlayer++) {
+                    // Prompt the current player for their words
+                    let word = prompt(`Player ${currentPlayer + 1}, please enter your word(s):`);
+
+                    // Check if the entered word is valid
+                    if (word === null || word.trim() === "") {
+                        alert("Please enter a valid word!");
+                        break; // Exit the game if the input is empty or cancelled
+                    }
+
+                    // Update the current player's array with the entered word(s)
+                    playerWords[currentPlayer].push(word);
+
+                    // Display the current player's words
+                    console.log(`Player ${currentPlayer + 1}'s words: ${playerWords[currentPlayer].join(", ")}`);
+                }
+            };
+
+            // Start the game
+            startGame();
+        });
+    </script>
+</body>
+</html>
